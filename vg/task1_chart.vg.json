@@ -1,0 +1,35 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1200,
+  "height": 600,
+  "data": {
+    "url": "https://raw.githubusercontent.com/dngu0107/Homework_w10/refs/heads/main/fire_nrt_M6_96619.csv"
+  },
+  "params": [
+    {
+      "name": "daynight_selection",
+      "bind": {
+        "input": "select",
+        "options": [null, "D", "N"],
+        "labels": ["Show All", "Day", "Night"],
+        "name": "Day/Night Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "daynight_selection == null || datum.daynight == daynight_selection"
+    }
+  ],
+  "mark": "point",
+  "encoding": {
+    "x": {"field": "frp", "type": "quantitative", "title": "Fire Radiative Power (MW)"},
+    "y": {"field": "brightness", "type": "quantitative", "title": "Brightness Temperature (K)"},
+    "color": {"field": "daynight", "type": "nominal", "title": "Day/Night"},
+    "tooltip": [
+      {"field": "frp", "type": "quantitative", "title": "Fire Radiative Power (MW)"},
+      {"field": "brightness", "type": "quantitative", "title": "Brightness Temperature (K)"},
+      {"field": "daynight", "type": "nominal", "title": "Day/Night"}
+    ]
+  }
+}
